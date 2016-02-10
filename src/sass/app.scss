@@ -1,0 +1,22 @@
+@import '../../node_modules/angular-material/angular-material.scss';
+
+$img-bg-color: #495849;
+
+.card-media {
+	background-color: $img-bg-color;
+}
+
+md-card-title {
+	cursor: pointer;
+}
+
+.expand{
+	transition: max-height .5s linear .25s;
+	height: 1/3vh;
+	max-height: 2/3vh;
+	background-color: #454656;
+}
+// .shrink{
+// 	transition: height.5s linear .25s;
+// 	height: 1/3vh;
+// }

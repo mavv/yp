@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+		<link rel="stylesheet" href="css/app.css" media="screen" title="no title" charset="utf-8">
+		<title>Youtube?</title>
+
+	</head>
+	<body ng-app="yp" ng-cloack>
+
+		<div ng-controller="YpController as yp">
+			<md-content class="md-padding" layout-xs="column" layout="row">
+
+				<div layout="column">
+
+				  <md-card>
+		        <md-card-title ng-class="{expand: expand}" ng-click="expand = true">
+		          <md-card-title-media >
+		            <div class="md-media-md card-media"></div>
+		          </md-card-title-media>
+							<md-card-title-text>
+		            <span class="md-headline">Card with image</span>
+		            <span class="md-subhead">Medium</span>
+		          </md-card-title-text>
+		        </md-card-title>
+
+		        <md-card-actions layout="row" layout-align="end center">
+		          <md-button>Action 1</md-button>
+		          <md-button>Action 2</md-button>
+		        </md-card-actions>
+		      </md-card>
+
+					<md-card>
+		        <md-card-title>
+
+		          <md-card-title-media>
+		            <div class="md-media-md card-media"></div>
+		          </md-card-title-media>
+							<md-card-title-text>
+								<span class="md-headline">Card with image</span>
+								<span class="md-subhead">Medium</span>
+							</md-card-title-text>
+		        </md-card-title>
+		        <md-card-actions layout="row" layout-align="end center">
+		          <md-button>Action 1</md-button>
+		          <md-button>Action 2</md-button>
+		        </md-card-actions>
+		      </md-card>
+
+					<md-card>
+		        <md-card-title>
+
+		          <md-card-title-media>
+		            <div class="md-media-md card-media"></div>
+		          </md-card-title-media>
+							<md-card-title-text>
+		            <span class="md-headline">Card with image</span>
+		            <span class="md-subhead">Medium</span>
+		          </md-card-title-text>
+		        </md-card-title>
+		        <md-card-actions layout="row" layout-align="end center">
+		          <md-button>Action 1</md-button>
+		          <md-button>Action 2</md-button>
+		        </md-card-actions>
+		      </md-card>
+
+				</div>
+	  	</md-content>
+		</div>
+
+		<!-- </md-content> -->
+
+		<script src="./js/yp.bundle.js" charset="utf-8"></script>
+	</body>
+</html>
