@@ -11,11 +11,16 @@ const sourcemaps = require('gulp-sourcemaps');
 const ngAnnotate = require('browserify-ngannotate');
 const templateCache = require('gulp-angular-templatecache');
 
+
+const rev = require('gulp-rev');
+const concat = require('gulp-concat');
+const addStream = require('add-stream');
+
 const paths = {
 	html: {
 		src: './src/index.html',
 		dest: './dest/',
-		views: './src/views/*.html'
+		views: './src/js/views/**/*.html'
 	},
 	sass: {
 		src: './src/sass/**/*.{scss,sass}',
@@ -51,17 +56,25 @@ gulp.task('html', () => {
 });
 
 gulp.task('views-cache', () => {
+	console.log('\nbuilding templateCache\n');
 
 	return gulp.src(paths.html.views)
-		.pipe($templateCache('templates.js', {
-			module: 'app.yp',
-			standAlone: false,
-		}))
-  	.pipe(gulp.dest('dist/views/'))
+					.on('error', (error) => {
+						console.log('templateCache error! ' + error);
+					})
+					.pipe(templateCache({
+						standAlone: true
+					}))
+					.pipe(gulp.dest(paths.js.dest));
 });
 
-gulp.task('sass', () => {
+// const prepareTemplateCache = () => {
+// 	console.log('building templateCache');
+// 	return gulp.src(paths.html.views).pipe(templateCache());
+// };
 
+gulp.task('sass', () => {
+	console.log('building sass');
   return gulp.src(paths.sass.src)
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest(paths.sass.dest))
@@ -69,6 +82,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('jsApp', () => {
+	console.log('\nbuilding js bundle\n');
   const bundler = watchify(browserify(wOpt));
 	return bundler.bundle()
 					.on('error', (error) => {
@@ -76,10 +90,15 @@ gulp.task('jsApp', () => {
 					})
 					.pipe(source('yp.bundle.js'))
 					.pipe(buffer())
+					// .pipe(addStream.obj(prepareTemplateCache()))
+					// .pipe(gulp.series('views-cache'))
+					// .pipe(rev())
 					.pipe(sourcemaps.init({
 						loadMaps: true // loads maps from browserify file
 					}))
 					.pipe(sourcemaps.write('./'))
+
+					// .pipe(concat('yp.bundle.js'))
 					.pipe(gulp.dest(paths.js.dest))
 					.pipe(connect.reload());
 });

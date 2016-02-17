@@ -36,9 +36,10 @@
 
 				// .dark();
 		})
-		.run(function ($templateCache) {
-			
-		});
+		.run(['$templateCache', function ($templateCache) {
+			$templateCache.put('player.html', '<span>fff</span>	');
+			console.log($templateCache);
+		}]);
 
 		// .config(($routeProvider) => {
 		// 	console.log($routeProvider);
