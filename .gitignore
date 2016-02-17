@@ -1,2 +1,7 @@
+# dirs
 node_modules
 dest
+
+
+# Files
+*.log

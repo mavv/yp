@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "browserify": "^13.0.0",
+    "browserify-ng-html2js": "^1.2.0",
     "browserify-ngannotate": "^2.0.0",
     "gulp": "git+https://git@github.com/gulpjs/gulp.git#4.0",
     "gulp-angular-templatecache": "^1.8.0",
@@ -38,5 +39,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
+  },
+  "browserify": {
+    "transform": ["browserify-ng-html2js"]
   }
 }

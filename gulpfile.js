@@ -11,7 +11,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const ngAnnotate = require('browserify-ngannotate');
 const templateCache = require('gulp-angular-templatecache');
 
-
+const ngHtml2Js = require('browserify-ng-html2js');
 const rev = require('gulp-rev');
 const concat = require('gulp-concat');
 const addStream = require('add-stream');
@@ -24,13 +24,14 @@ const paths = {
 	},
 	sass: {
 		src: './src/sass/**/*.{scss,sass}',
-		dest: './dest/css',
+		dest: './dest/css/',
 		opts: {}
 	},
 	js: {
 		src: './src/js/app.js',
 		srcAll: './src/js/**/*.js',
-		dest: './dest/js/'
+		dest: './dest/js/',
+		destTemplates: './src/js/'
 	}
 };
 
@@ -55,23 +56,16 @@ gulp.task('html', () => {
 		.pipe(connect.reload());
 });
 
-gulp.task('views-cache', () => {
-	console.log('\nbuilding templateCache\n');
-
-	return gulp.src(paths.html.views)
-					.on('error', (error) => {
-						console.log('templateCache error! ' + error);
-					})
-					.pipe(templateCache({
-						standAlone: true
-					}))
-					.pipe(gulp.dest(paths.js.dest));
-});
-
-// const prepareTemplateCache = () => {
-// 	console.log('building templateCache');
-// 	return gulp.src(paths.html.views).pipe(templateCache());
-// };
+// gulp.task('views-cache', () => {
+// 	console.log('\nbuilding `templateCache`\n');
+//
+// 	return gulp.src(paths.html.views)
+// 					.on('error', (error) => {
+// 						console.log('templateCache error! ' + error);
+// 					})
+// 					.pipe(templateCache())
+// 					.pipe(gulp.dest(paths.js.destTemplates));
+// });
 
 gulp.task('sass', () => {
 	console.log('building sass');
@@ -84,21 +78,18 @@ gulp.task('sass', () => {
 gulp.task('jsApp', () => {
 	console.log('\nbuilding js bundle\n');
   const bundler = watchify(browserify(wOpt));
-	return bundler.bundle()
+
+	return bundler
+					.bundle()
 					.on('error', (error) => {
 						console.log('browserify error! ' + error);
 					})
 					.pipe(source('yp.bundle.js'))
 					.pipe(buffer())
-					// .pipe(addStream.obj(prepareTemplateCache()))
-					// .pipe(gulp.series('views-cache'))
-					// .pipe(rev())
 					.pipe(sourcemaps.init({
 						loadMaps: true // loads maps from browserify file
 					}))
 					.pipe(sourcemaps.write('./'))
-
-					// .pipe(concat('yp.bundle.js'))
 					.pipe(gulp.dest(paths.js.dest))
 					.pipe(connect.reload());
 });
@@ -131,8 +122,11 @@ gulp.task('watch:views', () => {
 gulp.task('watch', gulp.series(
 	'html',
 	'sass',
+	// 'views-cache',
 	'jsApp',
-  gulp.parallel('watch:html', 'watch:views', 'watch:styles', 'watch:js')
+  gulp.parallel('watch:html', 'watch:styles',
+	// 'watch:views',
+	'watch:js')
 ));
 
 // -------------------------------------------- Default task

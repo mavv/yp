@@ -37,8 +37,9 @@
 				// .dark();
 		})
 		.run(['$templateCache', function ($templateCache) {
-			$templateCache.put('player.html', '<span>fff</span>	');
+			$templateCache.put('player.html', '<md-card>mavu</md-card>')
 			console.log($templateCache);
+			console.log($templateCache.get('player.html'));
 		}]);
 
 		// .config(($routeProvider) => {
