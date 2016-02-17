@@ -9,11 +9,13 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const sourcemaps = require('gulp-sourcemaps');
 const ngAnnotate = require('browserify-ngannotate');
+const templateCache = require('gulp-angular-templatecache');
 
 const paths = {
 	html: {
 		src: './src/index.html',
-		dest: './dest/'
+		dest: './dest/',
+		views: './src/views/*.html'
 	},
 	sass: {
 		src: './src/sass/**/*.{scss,sass}',
@@ -48,11 +50,15 @@ gulp.task('html', () => {
 		.pipe(connect.reload());
 });
 
-// gulp.task('views', () => {
-//
-// 	return gulp.src('./src/views/**/*')
-//   	.pipe(gulp.dest('dist/views/'))
-// });
+gulp.task('views-cache', () => {
+
+	return gulp.src(paths.html.views)
+		.pipe($templateCache('templates.js', {
+			module: 'app.yp',
+			standAlone: false,
+		}))
+  	.pipe(gulp.dest('dist/views/'))
+});
 
 gulp.task('sass', () => {
 
@@ -96,13 +102,19 @@ gulp.task('watch:styles', () => {
 
 gulp.task('watch:js', () => {
 	gulp.watch(paths.js.src, gulp.series('jsApp'));
-})
+});
+
+gulp.task('watch:views', () => {
+	gulp.watch(paths.html.views, gulp.series('views-cache'));
+});
 
 
-gulp.task('watch', gulp.series('html', 'sass', 'jsApp',
-  gulp.parallel('watch:html', 'watch:styles', 'watch:js')
+gulp.task('watch', gulp.series(
+	'html',
+	'sass',
+	'jsApp',
+  gulp.parallel('watch:html', 'watch:views', 'watch:styles', 'watch:js')
 ));
-
 
 // -------------------------------------------- Default task
 gulp.task('default', gulp.series(

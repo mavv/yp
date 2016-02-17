@@ -35,6 +35,9 @@
 			// $mdThemingProvider.theme('default');
 
 				// .dark();
+		})
+		.run(function ($templateCache) {
+			
 		});
 
 		// .config(($routeProvider) => {

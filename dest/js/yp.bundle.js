@@ -59730,7 +59730,10 @@ module.exports = angular;
 			// $mdThemingProvider.theme('default');
 
 				// .dark();
-		});
+		})
+		.run(["$templateCache", function ($templateCache) {
+			
+		}]);
 
 		// .config(($routeProvider) => {
 		// 	console.log($routeProvider);
@@ -59746,21 +59749,23 @@ module.exports = angular;
 
 	angular.module('yp')
 	.controller('YpController', [
-		// 'ngMaterial',
-		// 'ngMessages',
-		// require('angular-material'),
-		function ($scope, store) {
-			$scope.imagePath = 'washedout.png';
-			// $scope.toggle()
-			console.log('scope ', scope);
-			console.log(store);
-			// // var list = store.items;
-			// var vid = {
-			// 	link: 'https://',
-			// 	description: 'sadso a[dpoa [ d[wqoe ]]]'
-			// }
-			// this.list = store.items;
-			// // console.log($scope, vid);
+		function (store) {
+			var viewModel = this;
+
+			var list = [
+				{
+					link: 'https://www.youtube.com/watch?v=Y6qNjFQArsA',
+					description:'guru jazzmatazz 4'
+				},
+				{
+					link: 'https://www.youtube.com/watch?v=vB2Hy-pJ2TM',
+					description: 'esperanza spalding concert'
+				}
+			];
+			viewModel.list = list;
+			console.log(viewModel);
+			// $scope.expand = false;
+			// $scope.imagePath = 'washedout.png';
 			// store.saveItem(vid);
 		}]);
 })();

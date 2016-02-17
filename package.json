@@ -28,6 +28,7 @@
     "browserify": "^13.0.0",
     "browserify-ngannotate": "^2.0.0",
     "gulp": "git+https://git@github.com/gulpjs/gulp.git#4.0",
+    "gulp-angular-templatecache": "^1.8.0",
     "gulp-connect": "^2.3.1",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
