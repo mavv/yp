@@ -3,9 +3,16 @@
 
 	angular.module('root')
 	.controller('YpController', [
-		function (store) {
-			console.log('store in yp ', store, this);
-			// console.log(store.getFromLocal());
+		'store',
+		'grabber',
+		function (store, grabber) {
+			// console.log(grabber.apiReady);
+			if (grabber.apiReady === true) {
+				console.log('ready to mess with');
+			}
+
+			// console.log('store in yp ', store, grabber);
+			// console.log(store.fetchItems());
 			var viewModel = this;
 
 			var list = [
