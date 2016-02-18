@@ -10,12 +10,11 @@
 		<title>Youtube?</title>
 
 	</head>
-	<body ng-app="yp" ng-cloack>
+	<body>
 
-		<md-content class="md-padding" layout-xs="column" layout="row" 
-			ng-controller="YpController as yp">
-			<div layout="column">
-				<player ng-repeat="item in yp.list">
+		<md-content class="md-padding" layout-xs="column" layout="row"  ng-app="root"  ng-cloack>
+			<div layout="column" ng-view="#">
+				<player ng-controller="yp" ng-repeat="item in yp.list">
 					<span>{{yp.title}}</span>
 					<span>{{item.link}}</span>
 					<span>{{item.description}}</span>

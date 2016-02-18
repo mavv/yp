@@ -60,7 +60,7 @@ gulp.task('views-cache', () => {
 						console.log('views-cache errored ' + error);
 					})
 					.pipe(templateCache({
-						module: 'yp',
+						module: 'root',
 						moduleSystem: 'IIFE'
 					}))
 					.pipe(gulp.dest(paths.js.destTemplates));

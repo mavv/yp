@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('yp')
+	angular.module('root')
 		.factory('StorageService', function ($window, $q) {
 
 			var master = 'vid036';

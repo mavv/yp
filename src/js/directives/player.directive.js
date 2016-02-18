@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('yp')
+	angular.module('root')
 		.directive('Player', function () {
 			return {
 				restrict: 'E',

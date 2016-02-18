@@ -1,10 +1,10 @@
 (function () {
 	'use strict';
 
-	angular.module('yp')
+	angular.module('root')
 	.controller('YpController', [
 		function (store) {
-			console.log('store in ypCtrl ', store, this.store);
+			console.log('store in yp ', store, this);
 			// console.log(store.getFromLocal());
 			// var viewModel = this;
 			//

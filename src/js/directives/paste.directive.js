@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('yp')
+	angular.module('root')
 		.directive('PasteDirective', function () {
 			return {
 				restrict: 'A',
