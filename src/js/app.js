@@ -9,43 +9,42 @@
 			require('angular-route'),
 			require('angular-material')
 		])
-		.config(($routeProvider, $mdThemingProvider) => {
+		.config([
+			'$routeProvider',
+			'$mdThemingProvider',
+			function conf($routeProvider, $mdThemingProvider) {
 
-
-			var routeConfig = {
-				controllerAs: 'YpController',
-				// templateUrl: 'todomvc-index.html',
-				redirectTo: '/',
-				resolve: {
-					store: function (StorageService) {
-						StorageService.fetchItems();
-						console.log(StorageService);
-						return StorageService;
+				var routeConfig = {
+					controller: 'YpController as yp',
+					templateUrl: 'index.html',
+					redirectTo: '/',
+					resolve: {
+						store: function (StorageService) {
+							StorageService.fetchItems();
+							// console.log('resolver for ctrl route / ', StorageService);
+							// console.log(StorageService);
+							return StorageService;
+						}
 					}
-				}
-			};
+				};
 
-		$routeProvider
-			.when('/', routeConfig)
-			// .when('/:status', routeConfig)
-			.otherwise({
-				redirectTo: '/'
-			});
+				// console.log($routeProvider, $mdThemingProvider);
+				$routeProvider.when('/', routeConfig)
+				.otherwise({
+					redirectTo: '/'
+				});
 
-			// $mdThemingProvider.theme('default');
-
+				// console.log($routeProvider, routeConfig);
+				// $mdThemingProvider.theme('default');
 				// .dark();
-		})
+		}])
 		.run(['$templateCache', function ($templateCache) {
-			$templateCache.put('player.html', '<md-card>mavu</md-card>')
-			console.log($templateCache);
-			console.log($templateCache.get('player.html'));
+			// $templateCache.put('player.html', '<md-card>mavu</md-card>')
+			// $templateCache.put('player.html');
+			console.log('from run@bootstrap');
 		}]);
-
-		// .config(($routeProvider) => {
-		// 	console.log($routeProvider);
-    // });
 
 		require('./controllers/yp.controller.js');
 		require('./services/storage.service.js');
+		require('./templates.js');
 })(require('angular'));

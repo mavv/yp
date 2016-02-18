@@ -12,20 +12,18 @@
 	</head>
 	<body ng-app="yp" ng-cloack>
 
-		<md-content class="md-padding" layout-xs="column" layout="row"
+		<md-content class="md-padding" layout-xs="column" layout="row" 
 			ng-controller="YpController as yp">
-			<div layout="column" ng-repeat="item in yp.list">
-				<player>
+			<div layout="column">
+				<player ng-repeat="item in yp.list">
 					<span>{{yp.title}}</span>
 					<span>{{item.link}}</span>
 					<span>{{item.description}}</span>
 				</player>
 
 			</div>
-			<player></player>
   	</md-content>
 
 		<script src="./js/yp.bundle.js" charset="utf-8"></script>
-		<!-- <script src="./js/templates.js" charset="utf-8"></script> -->
 	</body>
 </html>

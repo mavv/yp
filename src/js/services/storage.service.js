@@ -5,16 +5,16 @@
 		.factory('StorageService', function ($window, $q) {
 
 			var master = 'vid036';
-			
+
 
 			var lister = {
 				items: [],
 				getFromLocal: function () {
-					console.log('c gfl');
+					// console.log('c gfl');
 					return JSON.parse($window.localStorage.getItem(master || []));
 				},
 				saveToLocal: function () {
-					console.log('c stl');
+					// console.log('c stl');
 					$window.localStorage.setItem(master, JSON.stringify(lister.items));
 				},
 				purgeLocal: function () {
@@ -55,7 +55,7 @@
 				fetchItems: function () {
 					var deferred = $q.defer();
 
-					angular.copy(store.getFromLocal(),  lister.items);
+					angular.copy(lister.getFromLocal(),  lister.items);
 					deferred.resolve(lister.items);
 
 					return deferred.promise;

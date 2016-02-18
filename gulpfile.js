@@ -10,11 +10,7 @@ const buffer = require('vinyl-buffer');
 const sourcemaps = require('gulp-sourcemaps');
 const ngAnnotate = require('browserify-ngannotate');
 const templateCache = require('gulp-angular-templatecache');
-
-const ngHtml2Js = require('browserify-ng-html2js');
-const rev = require('gulp-rev');
-const concat = require('gulp-concat');
-const addStream = require('add-stream');
+const rimraf = require('rimraf');
 
 const paths = {
 	html: {
@@ -56,26 +52,29 @@ gulp.task('html', () => {
 		.pipe(connect.reload());
 });
 
-// gulp.task('views-cache', () => {
-// 	console.log('\nbuilding `templateCache`\n');
-//
-// 	return gulp.src(paths.html.views)
-// 					.on('error', (error) => {
-// 						console.log('templateCache error! ' + error);
-// 					})
-// 					.pipe(templateCache())
-// 					.pipe(gulp.dest(paths.js.destTemplates));
-// });
+gulp.task('views-cache', () => {
+	console.log('\nbuilding views-cache\n');
+
+	return gulp.src(paths.html.views)
+					.on('error', (error) => {
+						console.log('views-cache errored ' + error);
+					})
+					.pipe(templateCache({
+						module: 'yp',
+						moduleSystem: 'IIFE'
+					}))
+					.pipe(gulp.dest(paths.js.destTemplates));
+});
 
 gulp.task('sass', () => {
-	console.log('building sass');
+	console.log('\nbuilding sass\n');
   return gulp.src(paths.sass.src)
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest(paths.sass.dest))
 		.pipe(connect.reload());
 });
 
-gulp.task('jsApp', () => {
+gulp.task('js-bundle', () => {
 	console.log('\nbuilding js bundle\n');
   const bundler = watchify(browserify(wOpt));
 
@@ -92,6 +91,18 @@ gulp.task('jsApp', () => {
 					.pipe(sourcemaps.write('./'))
 					.pipe(gulp.dest(paths.js.dest))
 					.pipe(connect.reload());
+});
+
+gulp.task('clean', () => {
+	// return gulp.src('./dest/**/*', { read: false }) // much faster
+  //  .pipe(rimraf({
+	// 	 force: true
+	//  }));
+
+	// console.log('\nclean dest\n');
+	rimraf('./dest', (err) => {
+		throw (err);
+	});
 });
 
 gulp.task('connect', () => {
@@ -111,7 +122,7 @@ gulp.task('watch:styles', () => {
 });
 
 gulp.task('watch:js', () => {
-	gulp.watch(paths.js.src, gulp.series('jsApp'));
+	gulp.watch(paths.js.src, gulp.series('views-cache', 'js-bundle'));
 });
 
 gulp.task('watch:views', () => {
@@ -120,12 +131,13 @@ gulp.task('watch:views', () => {
 
 
 gulp.task('watch', gulp.series(
+	'clean',
 	'html',
 	'sass',
-	// 'views-cache',
-	'jsApp',
+	'views-cache',
+	'js-bundle',
   gulp.parallel('watch:html', 'watch:styles',
-	// 'watch:views',
+	'watch:views',
 	'watch:js')
 ));
 
