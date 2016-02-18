@@ -6,7 +6,7 @@
 			return {
 				restrict: 'A',
 				// controllerAs: 'YpController',
-				// templateUrl: '',
+				templateUrl: '../views/player.html',
 				link: function ($scope, $element, $attrs) {
 					$scope.ytLink = 'asdasdasdas';
 

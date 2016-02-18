@@ -19,13 +19,13 @@
 				$routeProvider.when('/',  {
 					controller: 'YpController',
 					controllerAs: 'yp',
-					templateUrl: 'player.html',
+					templateUrl: 'app.html',
 					redirectTo: '/',
 					resolve: {
 						store: function (StorageService) {
 							StorageService.fetchItems();
 							// console.log('resolver for ctrl route / ', StorageService);
-							console.log('yp resolve ', StorageService);
+							// console.log('yp resolve ', StorageService);
 							return StorageService;
 						}
 					}
@@ -48,6 +48,7 @@
 
 
 		require('./controllers/yp.controller.js');
+		require('./directives/player.directive.js');
 		require('./services/storage.service.js');
 		require('./templates.js');
 })(require('angular'));

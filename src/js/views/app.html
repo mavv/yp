@@ -1,0 +1,19 @@
+<md-content class="md-padding" layout-xs="column" layout="row"  >
+  <md-list>
+    {{yp.list}}
+    <md-list-item ng-repeat="item in yp.list">
+      <player ng-model="item"></player>
+    </md-list-item>
+  </md-list>
+  <!-- <div layout="column" ng-view> -->
+    <!-- <div class="" ng-controller="YpController as yp" ng-repeat="item in yp.list"> -->
+      <!-- <player></player> -->
+    <!-- </div> -->
+    <!-- <player > -->
+      <!-- <span>{{yp.title}}</span>
+      <span>{{item.link}}</span>
+      <span>{{item.description}}</span> -->
+    <!-- </player> -->
+
+  <!-- </div> -->
+</md-content>

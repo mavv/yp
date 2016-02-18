@@ -2,12 +2,12 @@
 	'use strict';
 
 	angular.module('root')
-		.directive('Player', function () {
+		.directive('player', function () {
 			return {
 				restrict: 'E',
-				templateUrl: '../views/player.html',
+				templateUrl: 'player.html',
 				controllerAs: 'player',
-				controller: '../controllers/yp.controller.js',
+				controller: function () {},
 				link: function ($scope, $element, $attrs, YpController) {
 					console.log('!!!! dire');
 					console.log('from player $scope ', $scope);
