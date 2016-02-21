@@ -4,9 +4,8 @@
   angular.module('root')
     .factory('YoutubeService', function ($window, $q, $http, $log, $rootScope) {
       var grabber = $rootScope.$new(true);
-      // var grabber = {
-      //   ase: 'tata'
-      // };
+      var deferred = $q.defer();
+
       grabber.done = false;
 
       $window.onYouTubeIframeAPIReady = function () {
@@ -25,22 +24,29 @@
           grabber.width = width;
         };
 
+        grabber.setVideoUid = function (uid) {
+          grabber.videoUid = uid;
+        }
+
         grabber.onPlayerReady = function (event) {
+          // $log.log('@onPlayerReady');
           event.target.playVideo();
         };
 
         grabber.onStateChange = function (event) {
+          // $log.log('@onStateChange');
           if (event.data == $window.YT.PlayerState.PLAYING && !done) {
             $timeout(grabber.stopVideo, 2000);
             grabber.done = true;
           }
         };
 
-        // grabber.stopVideo = function () {
-        //   $window.player.stopVideo();
-        // }
+        grabber.stopVideo = function () {
+          $window.player.stopVideo();
+        }
 
         grabber.createPlayer = function () {
+          console.log('before returning new player');
           return new $window.YT.Player(grabber.playerId, {
             height: grabber.height,
             width: grabber.width,
@@ -52,7 +58,8 @@
           });
         };
       };
-
-      return grabber;
+      deferred.resolve(grabber);
+      return deferred.promise;
+      // return grabber;
     });
 })();

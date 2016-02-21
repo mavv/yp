@@ -11,8 +11,13 @@ const sourcemaps = require('gulp-sourcemaps');
 const ngAnnotate = require('browserify-ngannotate');
 const templateCache = require('gulp-angular-templatecache');
 const rimraf = require('rimraf');
+const svgSprite  = require('gulp-svg-sprite');
 
 const paths = {
+	assets: {
+		src: './src/assets/*.svg',
+		dest: './dest/assets/'
+	},
 	html: {
 		src: './src/index.html',
 		dest: './dest/',
@@ -47,10 +52,35 @@ const libs = [
 
 
 // ---------------------------------------------- Gulp Tasks
+
+gulp.task('static', () => {
+	return gulp.src(paths.assets.src)
+					.pipe(gulp.dest(paths.assets.dest))
+});
+
+// TODO: prepare to sprite svg's
+// gulp.task('assets', () => {
+// 	return gulp.src(paths.assets.src)
+// 					.pipe(svgSprite({
+// 						mode: {
+// 							css: {
+// 								render: {
+// 									scss: true
+// 								}
+// 							}
+// 						}
+// 					}))
+// 					.on('error', (error) => {
+// 						console.log('spriting svgs errored with ', error);
+// 					 /* Do some awesome error handling ... */
+// 					 })
+// 					.pipe(gulp.dest(paths.assets.dest));
+// });
+
 gulp.task('html', () => {
 	return gulp.src(paths.html.src)
-		.pipe(gulp.dest(paths.html.dest))
-		.pipe(connect.reload());
+					.pipe(gulp.dest(paths.html.dest))
+					.pipe(connect.reload());
 });
 
 gulp.task('views-cache', () => {
@@ -133,6 +163,7 @@ gulp.task('watch:views', () => {
 
 gulp.task('watch', gulp.series(
 	'clean',
+	'static',
 	'html',
 	'sass',
 	'views-cache',

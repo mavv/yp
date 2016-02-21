@@ -2,13 +2,11 @@
 	<md-card-title ng-class="{expand: expand}" ng-click="expand = true">
 		<md-card-title-media >
 			<div class="md-media-md card-media">
-				
-				<!-- <iframe src="" width="" height=""></iframe> -->
 			</div>
 		</md-card-title-media>
 		<md-card-title-text>
 			<span class="md-headline">{{item.description}}</span>
-			<span class="md-subhead">{{item.link}}</span>
+			<span class="md-subhead">{{item.videoUid}}</span>
 		</md-card-title-text>
 	</md-card-title>
 
@@ -17,3 +15,6 @@
 		<md-button>Action 2</md-button>
 	</md-card-actions>
 </md-card>
+<div id="atPlay" style="display: none;">
+
+</div>

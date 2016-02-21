@@ -35,7 +35,7 @@
 						return StorageService;
 					},
 					grabber: function (YoutubeService) {
-						console.log('ctrl resolve - youtube service', YoutubeService);
+						// console.log('ctrl resolve - youtube service', YoutubeService);
 						return YoutubeService;
 					}
 				}
@@ -45,8 +45,7 @@
 			});
 
 			// console.log($routeProvider, routeConfig);
-			// $mdThemingProvider.theme('default');
-			// .dark();
+			$mdThemingProvider.theme('default');//.dark();
 		}
 
 		require('./controllers/yp.controller.js');
