@@ -23,19 +23,8 @@
 			// }, 2000);
 
 			var viewModel = this;
-
-			var list = [
-				{
-					videoUid: 'Y6qNjFQArsA',
-					description:'guru jazzmatazz 4',
-				},
-				{
-					videoUid: 'vB2Hy-pJ2TM',
-					description: 'esperanza spalding concert',
-				}
-			];
-
 			viewModel.readyForm = false;
+			// initial item fetch
 			store.fetchItems()
 				.then(function (response) {
 					console.log(response);
@@ -46,9 +35,6 @@
 				.catch(function (error) {
 					console.log('wtf?? ', error);
 				});
-			// viewModel.refreshList();
-			// viewModel.formLink = '';
-			// viewModel.formLinkDescription = '';
 
 			viewModel.refreshList = function () {
 				store.fetchItems()
@@ -92,10 +78,6 @@
 						console.log('removed successfully ', item);
 					});
 			}
-			// console.log(viewModel);
-			// $scope.expand = false;
-			// $scope.imagePath = 'washedout.png';
-			// store.saveItem(vid);
 		}]);
 })();
 

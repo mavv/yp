@@ -1,7 +1,8 @@
 <md-card ng-model="item">
 	<md-card-title ng-class="{expand: expand}" ng-click="expand = true">
 		<md-card-title-media >
-			<div class="md-media-md card-media">
+			<div id="atPlay{{itemId}}" class="md-media-md card-media">
+
 			</div>
 		</md-card-title-media>
 		<md-card-title-text>
@@ -11,15 +12,12 @@
 	</md-card-title>
 
 	<md-card-actions layout="row" layout-align="end center">
-		<md-button class="md-icon-button" aria-label="Remove video" ng-click="removeFromList(item)">
+		<md-button class="md-icon-button" aria-label="Remove video" ng-click="remove(item)">
 			<md-icon md-svg-src="assets/ic_delete_forever_black_24px.svg"></md-icon>
 			<!-- <md-tooltip md-direction="left" md-autohide="true">Remove video</md-tooltip> -->
-		</md-button>
-		<!-- <md-button class="md-icon-button" aria-label="Edit video description">
+		<!-- </md-button>
+		<md-button class="md-icon-button" aria-label="Edit video description">
 			<md-icon md-svg-src="assets/ic_mode_edit_black_24px.svg"></md-icon>
 		</md-button> -->
 	</md-card-actions>
 </md-card>
-<div id="atPlay" style="display: none;">
-
-</div>
