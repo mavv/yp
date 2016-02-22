@@ -1,21 +1,30 @@
-<div layout="column">
-  <md-toolbar>
-  <div class="md-toolbar-tools">
-    <md-button class="md-primary md-icon-button" aria-label="Settings">
-       <md-icon md-svg-src="assets/ic_menu_white_24px.svg"></md-icon>
-         <!-- <md-tooltip md-direction="bottom" md-autohide="true">List setting</md-tooltip> -->
-     </md-button>
-    <span>Yp</span>
-    <!-- fill up the space between left and right area -->
-    <span flex></span>
-    <md-button class="md-icon-button" aria-label="Search">
-      <md-icon md-svg-src="assets/ic_search_white_24px.svg"></md-icon>
-      <!-- <md-tooltip md-direction="left" md-autohide="true">Search video</md-tooltip> -->
-    </md-button>
-  </div>
-  </md-toolbar>
-  <md-content layout="column" layout-align="center">
+<div  layout="column">
 
+  <md-content layout="column" layout-align="center">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <!-- <md-button class="md-primary md-icon-button" aria-label="Settings">
+           <md-icon md-svg-src="assets/ic_menu_white_24px.svg"></md-icon>
+             <md-tooltip md-direction="bottom" md-autohide="true">List setting</md-tooltip>
+         </md-button> -->
+        <span>Yp</span>
+        <!-- fill up the space between left and right area -->
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Search" ng-if="yp.searchingReady" ng-click="yp.searchingToggle($event)">
+          <md-icon md-svg-src="assets/ic_search_white_24px.svg"></md-icon>
+          <!-- <md-tooltip md-direction="left" md-autohide="true">Search video</md-tooltip> -->
+        </md-button>
+        <md-input-container ng-if="!yp.searchingReady">
+          <md-icon md-svg-src="assets/ic_clear_white_24px.svg" ng-click="yp.searchingToggle($event)"></md-icon>
+          <input type="text" class="searchInput" required placeholder="Search video"
+            ng-model="query" ng-change="yp.filterList(query)">
+        </md-input-container>
+      </div>
+    </md-toolbar>
+    <md-button class="md-fab md-fab-bottom-right fab-fixed" ng-click="yp.addFormToggle($event)">
+      <md-icon md-svg-src="assets/ic_add_white_24px.svg" aria-label="Add youtube video"></md-icon>
+      <!-- <md-tooltip md-direction="left" md-autohide="true">Add video</md-tooltip> -->
+    </md-button>
     <!-- add youtube video to playlist form  -->
     <form name="addToPlaylist" ng-if="yp.readyForm">
       <md-input-container md-no-float>
@@ -41,14 +50,11 @@
 
     <md-list >
       <md-list-item ng-repeat="item in yp.list">
-        <player ng-model="item" grabber="grabber" remove="yp.removeFromList(item)"></player>
+        <player flex ng-model="item" grabber="grabber" remove="yp.removeFromList(item)"></player>
       </md-list-item>
     </md-list>
   </md-content>
-  <md-button class="md-fab md-fab-bottom-right" ng-click="yp.addFormToggle($event)">
-    <md-icon md-svg-src="assets/ic_add_white_24px.svg" aria-label="Add youtube video"></md-icon>
-    <!-- <md-tooltip md-direction="left" md-autohide="true">Add video</md-tooltip> -->
-  </md-button>
+
 </div>
 
 

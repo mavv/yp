@@ -5,10 +5,26 @@ $img-bg-color: #495849;
 .card-media {
 	background-color: $img-bg-color;
 }
+.fab-fixed {
+	position: fixed !important;
+}
+
+.searchInput {
+	color: white;
+}
+
+md-card .inactive {
+	height: 27vh;
+}
 
 md-card-title {
+	height: auto;
+	md-card-title-media {
+		height: auto;
+	}
 	cursor: pointer;
 }
+
 
 .expand{
 	transition: max-height .5s linear .25s;

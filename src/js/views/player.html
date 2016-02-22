@@ -1,5 +1,5 @@
-<md-card ng-model="item">
-	<md-card-title ng-class="{expand: expand}" ng-click="initPlayer($event)">
+<md-card class="inactive" ng-model="item">
+	<md-card-title ng-click="initPlayer($event)">
 		<md-card-title-media >
 			<script src="https://www.youtube.com/iframe_api" charset="utf-8"></script>
 			<div id="atPlay{{itemId}}" class="md-media-md card-media">
@@ -7,7 +7,7 @@
 			</div>
 		</md-card-title-media>
 		<md-card-title-text>
-			<span class="md-headline">{{item.description}}</span>
+			<span class="md-title">{{item.description}}</span>
 			<span class="md-subhead">{{item.videoUid}}</span>
 		</md-card-title-text>
 	</md-card-title>

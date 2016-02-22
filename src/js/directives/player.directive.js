@@ -18,7 +18,7 @@
 						// console.log('videoUid for this instance ', $scope.item.videoUid,  $scope.item.videoUid.length);
 						$scope.itemId = $scope.item.$$hashKey.split(':')[1];
 						$scope.initPlayer = function (evt) {
-							// console.log('initializing player ', evt);
+							console.log('initializing player ', evt);
 							$timeout(function  () {
 								// console.log('in timeout at ', $scope.itemId);
 								// console.log('and apiReady ', grabber.player ,grabber.apiReady);
