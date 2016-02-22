@@ -41,7 +41,7 @@
 
     <md-list >
       <md-list-item ng-repeat="item in yp.list">
-        <player ng-model="item" remove="yp.removeFromList(item)"></player>
+        <player ng-model="item" grabber="grabber" remove="yp.removeFromList(item)"></player>
       </md-list-item>
     </md-list>
   </md-content>

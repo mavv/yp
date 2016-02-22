@@ -9,19 +9,6 @@
 		'$timeout',
 		function ($scope, store, grabber, $timeout) {
 
-			// console.log('yp ctrl // youtube 	', grabber);
-			// $timeout(function  () {
-			// 	if (grabber.apiReady) {
-			// 		console.log('mess with it already');
-			// 		grabber.bindPlayerToId('atPlay');
-			// 		grabber.setPlayerWidth(400);
-			// 		grabber.setPlayerHeight(200);
-			// 		grabber.setVideoUid('Y6qNjFQArsA');
-			// 		grabber.createPlayer();
-			//
-			// 	}
-			// }, 2000);
-
 			var viewModel = this;
 			viewModel.readyForm = false;
 			// initial item fetch
