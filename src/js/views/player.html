@@ -1,4 +1,4 @@
-<md-card>
+<md-card ng-model="item">
 	<md-card-title ng-class="{expand: expand}" ng-click="expand = true">
 		<md-card-title-media >
 			<div class="md-media-md card-media">
@@ -11,8 +11,13 @@
 	</md-card-title>
 
 	<md-card-actions layout="row" layout-align="end center">
-		<md-button>Action 1</md-button>
-		<md-button>Action 2</md-button>
+		<md-button class="md-icon-button" aria-label="Remove video" ng-click="removeFromList(item)">
+			<md-icon md-svg-src="assets/ic_delete_forever_black_24px.svg"></md-icon>
+			<!-- <md-tooltip md-direction="left" md-autohide="true">Remove video</md-tooltip> -->
+		</md-button>
+		<!-- <md-button class="md-icon-button" aria-label="Edit video description">
+			<md-icon md-svg-src="assets/ic_mode_edit_black_24px.svg"></md-icon>
+		</md-button> -->
 	</md-card-actions>
 </md-card>
 <div id="atPlay" style="display: none;">

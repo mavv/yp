@@ -6,7 +6,8 @@
 			require('angular-animate'),
 			require('angular-aria'),
 			require('angular-route'),
-			require('angular-material')
+			require('angular-material'),
+			require('angular-messages')
 		])
 		.config([
 			'$routeProvider',

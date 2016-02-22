@@ -45,7 +45,7 @@
 				},
 				removeItem: function (item) {
 					var deferred = $q.defer();
-
+					console.log('removing ', item);
 					lister.items.splice(lister.items.indexOf(item), 1);
 					lister.saveToLocal(lister.items);
 					deferred.resolve(lister.items);

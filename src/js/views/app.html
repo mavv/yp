@@ -1,41 +1,57 @@
-<!-- <md-content class="md-padding" layout-xs="column" layout="row"  > -->
-  <div layout="column" layout-fill>
-    <md-toolbar>
-    <div class="md-toolbar-tools">
-      <md-button class="md-primary md-icon-button" aria-label="Settings">
-         <md-icon md-svg-src="assets/ic_menu_white_24px.svg" aria-label="android"></md-icon>
-           <!-- <md-tooltip md-direction="bottom" md-autohide="true">List setting</md-tooltip> -->
-       </md-button>
-      <span>Yp</span>
-      <!-- fill up the space between left and right area -->
-      <span flex></span>
-      <md-button class="md-icon-button" aria-label="Search">
-        <md-icon md-svg-src="assets/ic_search_white_24px.svg"></md-icon>
-        <!-- <md-tooltip md-direction="left" md-autohide="true">Search video</md-tooltip> -->
-      </md-button>
-    </div>
-    </md-toolbar>
-    <md-content>
-      <md-list>
-        <md-list-item ng-repeat="item in yp.list">
-          <player ng-model="item"></player>
-        </md-list-item>
-      </md-list>
-    </md-content>
-    <md-button class="md-fab md-fab-bottom-right" ng-click="yp.addItem($event)">
-      <md-icon md-svg-src="assets/ic_add_white_24px.svg" aria-label="Add youtube video"></md-icon>
-      <!-- <md-tooltip md-direction="left" md-autohide="true">Add video</md-tooltip> -->
+<div layout="column">
+  <md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-primary md-icon-button" aria-label="Settings">
+       <md-icon md-svg-src="assets/ic_menu_white_24px.svg"></md-icon>
+         <!-- <md-tooltip md-direction="bottom" md-autohide="true">List setting</md-tooltip> -->
+     </md-button>
+    <span>Yp</span>
+    <!-- fill up the space between left and right area -->
+    <span flex></span>
+    <md-button class="md-icon-button" aria-label="Search">
+      <md-icon md-svg-src="assets/ic_search_white_24px.svg"></md-icon>
+      <!-- <md-tooltip md-direction="left" md-autohide="true">Search video</md-tooltip> -->
     </md-button>
   </div>
+  </md-toolbar>
+  <md-content layout="column" layout-align="center">
+
+    <!-- add youtube video to playlist form  -->
+    <form name="addToPlaylist" ng-if="yp.readyForm">
+      <md-input-container md-no-float>
+        <md-icon md-svg-src="assets/ic_insert_link_black_24px.svg"></md-icon>
+        <input type="text" required name="youtubeLink" ng-model="yp.formLink"
+          placeholder="Paste Youtube link here">
+        <div ng-messages="addToPlaylist.youtubeLink.$error">
+          <div ng-message="required">
+            In order to add a video to playlist at least a link is required.
+          </div>
+        </div>
+      </md-input-container>
+
+      <md-input-container md-no-float>
+        <md-icon md-svg-src="assets/ic_insert_comment_black_24px.svg"></md-icon>
+        <input type="text" name="linkDescription" ng-model="yp.formLinkDescription"
+          placeholder="Link description here">
+      </md-input-container>
+
+      <md-button ng-click="yp.submitToList($event)" aria-label="Add video to list">Add it</md-button>
+      <md-button ng-click="yp.addFormToggle($event)" aria-label="Cancel adding video to list">Cancel</md-button>
+    </form>
+
+    <md-list >
+      <md-list-item ng-repeat="item in yp.list">
+        <player item="item"></player>
+      </md-list-item>
+    </md-list>
+  </md-content>
+  <md-button class="md-fab md-fab-bottom-right" ng-click="yp.addFormToggle($event)">
+    <md-icon md-svg-src="assets/ic_add_white_24px.svg" aria-label="Add youtube video"></md-icon>
+    <!-- <md-tooltip md-direction="left" md-autohide="true">Add video</md-tooltip> -->
+  </md-button>
+</div>
 
 
 
 
   <!-- {{yp.list}} -->
-  <!-- <md-list>
-    <md-list-item ng-repeat="item in yp.list">
-      <player ng-model="item"></player>
-    </md-list-item>
-  </md-list> -->
-  <!-- <div layout="column" ng-view> -->
-<!-- </md-content> -->
